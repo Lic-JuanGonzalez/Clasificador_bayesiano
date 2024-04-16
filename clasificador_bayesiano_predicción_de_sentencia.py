@@ -13,11 +13,12 @@ from sklearn.model_selection import train_test_split
 
 # Dataset
 training_data = [
-    ('I love this movie!', 'positive'),
-    ('This movie is terrible!', 'negative'),
-    ('The acting is great!', 'positive'),
-    ('The plot is confusing.', 'negative'),
-    ('The special effects are amazing!', 'positive'),
+    ('Me encanta esta pelicula!', 'Positivo'),
+    ('No me gusta esta pelicula!', 'Negativo'),
+    ('Esta pelicula es mala!', 'Negativo'),
+    ('La actuacion es genia;!', 'Positivo'),
+    ('La trama es confusa.', 'Negativo'),
+    ('Los efectos especiales son buenisimos!', 'Positivo'),
 ]
 
 vectorizer = CountVectorizer()
@@ -28,15 +29,15 @@ labels = [data[1] for data in training_data]
 
 X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2)
 
-# Enrenamiento
+# Entrenamiento
 classifier = MultinomialNB()
 classifier.fit(X_train, y_train)
 
 accuracy = classifier.score(X_test, y_test)
-print('Accuracy:', accuracy)
+print('precision:', accuracy)
 
 # Prediccion de sentencia
-new_sentence = 'This movie is okay.'
+new_sentence = 'Esta pelicula es confusa'
 new_features = vectorizer.transform([new_sentence])
 predicted_label = classifier.predict(new_features)[0]
-print('Predicted sentiment:', predicted_label)
+print('Sentimiento predecido:', predicted_label)
